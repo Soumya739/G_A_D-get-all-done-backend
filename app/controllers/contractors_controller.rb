@@ -19,6 +19,6 @@ class ContractorsController < ApplicationController
     private
 
     def set_param
-        params.require(:contractor).permit(:user_id, :services, :projects_completed, :password)
+        params.require(:contractor).permit(:user_id, :services, :projects_completed)
     end
 end

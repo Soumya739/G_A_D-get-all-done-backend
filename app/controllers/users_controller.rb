@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     private
 
     def set_param
-        puts(params)
-        params.require(:user).permit(:username, :email, :city, :country, :phone, :contractor, :contractee)
+        params.require(:user).permit(:username, :email, :city, :country, :phone, :contractor, :contractee, :password)
     end
 end

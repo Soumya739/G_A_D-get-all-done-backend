@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :category_posts
+  resources :categories
   resources :users
-  resources :tasks
   resources :contractors
   resources :contractees
+  post "/user_posts", to: "posts#getContracteePosts"
   resources :posts do
     resources :comments
   end
@@ -10,7 +12,13 @@ Rails.application.routes.draw do
   resources :comments do
     resources :comments
   end
-  post '/auth', to: 'auth#create'
-  get '/current_user', to: 'auth#show'
+  namespace :api do
+    namespace :v1 do
+      post '/auth', to: 'auth#create'
+      get '/current_user', to: 'auth#show'
+    end
+  end
+
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

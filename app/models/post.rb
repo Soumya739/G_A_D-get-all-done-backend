@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
-    has_many :tasks
-    has_many :contractees, through: :tasks
+    belongs_to :contractee
+    belongs_to :contractor, optional: true
     has_many :comments, as: :commentable
+    belongs_to :category
 end

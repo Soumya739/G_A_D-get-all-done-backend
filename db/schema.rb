@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_232814) do
+ActiveRecord::Schema.define(version: 2020_01_02_033019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -25,7 +31,6 @@ ActiveRecord::Schema.define(version: 2019_12_30_232814) do
 
   create_table "contractees", force: :cascade do |t|
     t.integer "user_id"
-    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -33,23 +38,18 @@ ActiveRecord::Schema.define(version: 2019_12_30_232814) do
   create_table "contractors", force: :cascade do |t|
     t.integer "user_id"
     t.integer "projects_completed"
-    t.string "services", default: [], array: true
-    t.string "password_digest"
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.string "discription"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.integer "post_id"
+    t.string "description"
     t.integer "contractee_id"
     t.integer "contractor_id"
+    t.integer "category_id"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_232814) do
     t.integer "phone"
     t.boolean "contractor"
     t.boolean "contractee"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -4,8 +4,7 @@ class CreateContractors < ActiveRecord::Migration[6.0]
       t.integer :user_id
       # t.text :reviews, array: true, default: []
       t.integer :projects_completed
-      t.string :services, array: true, default: []
-      t.string :password_digest
+      t.string :category
 
       t.timestamps
     end

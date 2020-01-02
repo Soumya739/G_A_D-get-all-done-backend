@@ -19,7 +19,7 @@ class ContracteesController < ApplicationController
     private
 
     def set_param
-        params.require(:contractee).permit(:user_id, :password)
+        params.require(:contractee).permit(:user_id)
     end
 
 end
