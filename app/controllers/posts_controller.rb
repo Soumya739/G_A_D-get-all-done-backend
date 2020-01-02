@@ -85,7 +85,6 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        byebug
         if contractee?
             contractee = current_contractee
             post= Post.find_by(id: params[:id])

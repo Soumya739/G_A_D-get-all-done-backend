@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :categories
+  post "/users/:id", to: "users#show"
   resources :users
   resources :contractors
   resources :contractees
