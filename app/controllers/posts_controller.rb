@@ -35,13 +35,13 @@ class PostsController < ApplicationController
                     else
                         category = Category.create(tag: params[:category])
                     end 
-                    post = post.update(title: params[:title], description: params[:description], category_id: category.id)
-                    render :json => post
+                    post.update(title: params[:title], description: params[:description], category_id: category.id)
+                    render :json => Post.find_by(id: params[:id])
                 else 
                     render json: {status: "error", code: 400, message: "Completed post can't be updated"}                     
                 end    
             else    
-                render json: {status: "error", code: 403, message: "you are not authorized to change this post  xckhlkfhgkhgjfxhjklkhgc"}                
+                render json: {status: "error", code: 403, message: "you are not authorized to change this post"}                
             end
         end  
     end
@@ -82,6 +82,20 @@ class PostsController < ApplicationController
             byebug 
             render json: {status: "error", code: 403, message: "please login as contractee"}
         end    
+    end
+
+    def destroy
+        byebug
+        if contractee?
+            contractee = current_contractee
+            post= Post.find_by(id: params[:id])
+            if(post && post.contractee.id == contractee.id)
+                post.destroy
+            else
+                render json: {status: "error", code: 403, message: "you are not authorized to delete this post"}            
+            end
+            render json: {status: "sucsess", code:200, message: "Post Deleted"}
+        end
     end
 
 end

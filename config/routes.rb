@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :category_posts
   resources :categories
   resources :users
   resources :contractors
